@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 40" width="160" height="40">
+  <!-- Vortex icon -->
+  <g transform="translate(20,20)">
+    <!-- 5 swirling blades -->
+    <path d="M2,-8 C8,-16 18,-12 16,-4 C14,2 8,4 2,2 C0,0 0,-4 2,-8Z" fill="white" opacity="0.9" transform="rotate(0)"/>
+    <path d="M2,-8 C8,-16 18,-12 16,-4 C14,2 8,4 2,2 C0,0 0,-4 2,-8Z" fill="white" opacity="0.9" transform="rotate(72)"/>
+    <path d="M2,-8 C8,-16 18,-12 16,-4 C14,2 8,4 2,2 C0,0 0,-4 2,-8Z" fill="white" opacity="0.9" transform="rotate(144)"/>
+    <path d="M2,-8 C8,-16 18,-12 16,-4 C14,2 8,4 2,2 C0,0 0,-4 2,-8Z" fill="white" opacity="0.9" transform="rotate(216)"/>
+    <path d="M2,-8 C8,-16 18,-12 16,-4 C14,2 8,4 2,2 C0,0 0,-4 2,-8Z" fill="white" opacity="0.9" transform="rotate(288)"/>
+    <!-- Center dot -->
+    <circle cx="0" cy="0" r="2.5" fill="white"/>
+    <!-- Outer ring -->
+    <circle cx="0" cy="0" r="17" fill="none" stroke="white" stroke-width="1.2" opacity="0.4"/>
+  </g>
+  <!-- Brand text -->
+  <text x="46" y="24" font-family="Noto Sans TC, sans-serif" font-weight="700" font-size="18" fill="white" letter-spacing="1">呆森</text>
+  <text x="46" y="36" font-family="Montserrat, sans-serif" font-weight="700" font-size="9" fill="white" letter-spacing="3" opacity="0.8">DAISEN</text>
+</svg>

@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>呆森 DaiSen｜Dyson 深度清潔 × 配件</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;700;900&family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --blue: #1E6FA8;
+  --cyan: #00B4D8;
+  --dark: #0a1628;
+  --dark2: #0d1f3c;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-snap-type: y mandatory; scroll-behavior: smooth; overflow-y: scroll; }
+body { font-family: 'Noto Sans TC', sans-serif; background: var(--dark); }
+
+/* ── NAV ── */
+nav.topnav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 999;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 48px;
+  background: rgba(10, 22, 40, 0.75);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(0, 180, 216, 0.12);
+  height: 64px;
+  transition: background 0.3s;
+}
+.nav-brand { display: flex; align-items: center; text-decoration: none; }
+.nav-links { display: flex; gap: 4px; }
+.nav-link {
+  color: rgba(255,255,255,0.65); text-decoration: none;
+  font-size: 13px; font-weight: 500; letter-spacing: 0.5px;
+  padding: 8px 16px; border-radius: 6px;
+  transition: all 0.2s;
+}
+.nav-link:hover { color: #fff; background: rgba(255,255,255,0.08); }
+.nav-cta {
+  background: #06c755; color: #fff; padding: 8px 20px;
+  border-radius: 20px; font-size: 13px; font-weight: 700;
+  text-decoration: none; transition: all 0.2s;
+}
+.nav-cta:hover { background: #05a847; transform: translateY(-1px); }
+
+/* ── SECTIONS ── */
+.panel {
+  scroll-snap-align: start;
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: center;
+  padding: 80px 48px 64px;
+  position: relative; overflow: hidden;
+}
+
+/* Animated entrance */
+.reveal        { opacity: 0; transform: translateY(50px); transition: opacity 0.9s cubic-bezier(.16,1,.3,1), transform 0.9s cubic-bezier(.16,1,.3,1); }
+.reveal-left   { opacity: 0; transform: translateX(-60px); transition: opacity 0.9s cubic-bezier(.16,1,.3,1), transform 0.9s cubic-bezier(.16,1,.3,1); }
+.reveal-right  { opacity: 0; transform: translateX(60px);  transition: opacity 0.9s cubic-bezier(.16,1,.3,1), transform 0.9s cubic-bezier(.16,1,.3,1); }
+.reveal-scale  { opacity: 0; transform: scale(0.85);       transition: opacity 0.9s cubic-bezier(.16,1,.3,1), transform 0.9s cubic-bezier(.16,1,.3,1); }
+.reveal.visible, .reveal-left.visible, .reveal-right.visible, .reveal-scale.visible {
+  opacity: 1; transform: none;
+}
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.22s; }
+.reveal-delay-3 { transition-delay: 0.34s; }
+.reveal-delay-4 { transition-delay: 0.46s; }
+
+/* ── S1: HERO ── */
+#s1 {
+  background: radial-gradient(ellipse at 30% 40%, #1a4a7a 0%, #0a1628 60%),
+              radial-gradient(ellipse at 80% 60%, #0d3558 0%, transparent 50%);
+}
+
+/* Hero auto-play keyframe animations */
+@keyframes heroFadeUp   { from { opacity:0; transform:translateY(40px); } to { opacity:1; transform:none; } }
+@keyframes heroFadeIn   { from { opacity:0; } to { opacity:1; } }
+@keyframes heroPop      { from { opacity:0; transform:scale(0.9) translateY(20px); } to { opacity:1; transform:none; } }
+@keyframes glowPulse    { 0%,100%{text-shadow:0 0 30px rgba(0,180,216,0.4);} 50%{text-shadow:0 0 60px rgba(0,180,216,0.8), 0 0 100px rgba(0,180,216,0.3);} }
+
+.hero-eyebrow {
+  font-size: 12px; letter-spacing: 4px; text-transform: uppercase;
+  color: var(--cyan); font-family: 'Montserrat', sans-serif; font-weight: 700;
+  margin-bottom: 24px;
+  opacity: 0; animation: heroFadeUp 0.8s cubic-bezier(.16,1,.3,1) 0.2s forwards;
+}
+.hero-h1 {
+  font-size: clamp(48px, 8vw, 100px);
+  font-weight: 900; line-height: 1.05;
+  color: #fff; margin-bottom: 8px;
+  letter-spacing: -1px;
+  opacity: 0; animation: heroFadeUp 0.9s cubic-bezier(.16,1,.3,1) 0.45s forwards;
+}
+.hero-h1 .accent {
+  color: var(--cyan); display: block;
+  animation: glowPulse 3s ease-in-out 2.5s infinite;
+}
+.hero-sub {
+  font-size: clamp(15px, 2vw, 18px);
+  color: rgba(255,255,255,0.5); line-height: 1.7;
+  margin-bottom: 48px; max-width: 480px;
+  opacity: 0; animation: heroFadeUp 0.9s cubic-bezier(.16,1,.3,1) 0.7s forwards;
+}
+.hero-btns {
+  display: flex; gap: 16px; flex-wrap: wrap;
+  opacity: 0; animation: heroPop 0.8s cubic-bezier(.16,1,.3,1) 1s forwards;
+}
+.btn-main {
+  background: var(--cyan); color: #fff;
+  padding: 16px 36px; border-radius: 50px;
+  font-size: 15px; font-weight: 700; text-decoration: none;
+  transition: all 0.3s;
+  box-shadow: 0 0 40px rgba(0,180,216,0.3);
+}
+.btn-main:hover { background: #00c9f0; box-shadow: 0 0 60px rgba(0,180,216,0.5); transform: translateY(-2px); }
+.btn-ghost {
+  color: rgba(255,255,255,0.6); border: 1px solid rgba(255,255,255,0.2);
+  padding: 16px 36px; border-radius: 50px;
+  font-size: 15px; font-weight: 500; text-decoration: none;
+  transition: all 0.3s;
+}
+.btn-ghost:hover { border-color: rgba(255,255,255,0.5); color: #fff; }
+
+/* Floating orb */
+.orb {
+  position: absolute; border-radius: 50%;
+  background: radial-gradient(circle, rgba(0,180,216,0.15) 0%, transparent 70%);
+  pointer-events: none; animation: orbFloat 8s ease-in-out infinite;
+}
+.orb-1 { width: 600px; height: 600px; top: -200px; right: -150px; animation-delay: 0s; }
+.orb-2 { width: 300px; height: 300px; bottom: -100px; left: -50px; animation-delay: -4s; }
+@keyframes orbFloat {
+  0%, 100% { transform: translate(0,0) scale(1); }
+  33%       { transform: translate(20px,-30px) scale(1.05); }
+  66%       { transform: translate(-15px,20px) scale(0.95); }
+}
+
+/* Side dots nav */
+.side-dots {
+  position: fixed; right: 24px; top: 50%; transform: translateY(-50%);
+  z-index: 500; display: flex; flex-direction: column; gap: 12px;
+}
+.side-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: rgba(255,255,255,0.2); cursor: pointer;
+  transition: all 0.3s; border: 1px solid rgba(255,255,255,0.1);
+}
+.side-dot.active { background: var(--cyan); transform: scale(1.4); border-color: var(--cyan); box-shadow: 0 0 10px rgba(0,180,216,0.5); }
+
+/* Hero typewriter cursor */
+.cursor { display: inline-block; width: 3px; background: var(--cyan); animation: blink 1s step-end infinite; margin-left: 2px; vertical-align: middle; }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+/* Scroll hint */
+.scroll-hint {
+  position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  color: rgba(255,255,255,0.25); font-size: 11px; letter-spacing: 2px;
+}
+.scroll-hint span { animation: bounce 2s infinite; }
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(6px); }
+}
+
+/* ── S2: PAIN POINTS ── */
+#s2 { background: var(--dark2); text-align: center; }
+.pain-label {
+  font-size: 11px; letter-spacing: 5px; color: var(--cyan);
+  font-family: 'Montserrat', sans-serif; font-weight: 700;
+  margin-bottom: 20px; text-transform: uppercase;
+}
+.pain-h2 {
+  font-size: clamp(30px, 5vw, 56px); font-weight: 900; color: #fff;
+  margin-bottom: 16px; line-height: 1.1;
+}
+.pain-h2 .red { color: #ff4d6d; }
+.pain-desc { font-size: 16px; color: rgba(255,255,255,0.4); margin-bottom: 64px; }
+.stat-row {
+  display: flex; gap: 32px; justify-content: center; flex-wrap: wrap;
+  max-width: 900px; margin: 0 auto 56px;
+}
+.stat-card {
+  flex: 1; min-width: 180px; max-width: 220px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 20px; padding: 32px 24px;
+  transition: border-color 0.3s;
+}
+.stat-card:hover { border-color: rgba(0,180,216,0.3); }
+.stat-icon { font-size: 32px; margin-bottom: 16px; }
+.stat-num {
+  font-family: 'Montserrat', sans-serif; font-weight: 900;
+  font-size: 42px; color: var(--cyan); line-height: 1;
+  margin-bottom: 8px;
+}
+.stat-unit { font-size: 13px; color: rgba(255,255,255,0.35); line-height: 1.6; }
+.stat-card.highlight {
+  background: linear-gradient(135deg, rgba(30,111,168,0.3), rgba(0,180,216,0.2));
+  border-color: rgba(0,180,216,0.3);
+}
+.stat-card.highlight .stat-num { color: #fff; font-size: 32px; }
+
+/* ── S3: CLEAN SERVICE ── */
+#s3 {
+  background: linear-gradient(160deg, #0f2744 0%, #0a1628 50%, #0d1f3c 100%);
+  text-align: center;
+}
+.clean-eyebrow {
+  font-size: 11px; letter-spacing: 5px; color: #06c755;
+  font-family: 'Montserrat', sans-serif; font-weight: 700;
+  margin-bottom: 20px; text-transform: uppercase;
+}
+.clean-h2 {
+  font-size: clamp(32px, 5vw, 60px); font-weight: 900; color: #fff;
+  margin-bottom: 16px; line-height: 1.1;
+}
+.clean-sub { font-size: 16px; color: rgba(255,255,255,0.4); margin-bottom: 56px; }
+.flow-row {
+  display: flex; align-items: center; gap: 0;
+  justify-content: center; max-width: 860px; margin: 0 auto 56px;
+}
+.flow-item { display: flex; flex-direction: column; align-items: center; flex: 1; }
+.flow-circle {
+  width: 72px; height: 72px; border-radius: 50%;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(0,180,216,0.25);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 28px; margin-bottom: 14px;
+  transition: all 0.3s;
+}
+.flow-item:hover .flow-circle {
+  background: rgba(0,180,216,0.15);
+  border-color: var(--cyan);
+  box-shadow: 0 0 24px rgba(0,180,216,0.2);
+}
+.flow-name { font-size: 13px; font-weight: 700; color: #fff; margin-bottom: 4px; }
+.flow-note { font-size: 11px; color: rgba(255,255,255,0.3); }
+.flow-sep { color: rgba(255,255,255,0.12); font-size: 24px; padding: 0 8px; margin-bottom: 28px; flex-shrink: 0; }
+
+/* Price cards */
+.price-row { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; max-width: 860px; margin: 0 auto 48px; }
+.price-card {
+  flex: 1; min-width: 200px; max-width: 260px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 20px; padding: 28px 24px;
+  text-align: center; position: relative;
+}
+.price-card.featured {
+  background: linear-gradient(160deg, rgba(30,111,168,0.25), rgba(0,180,216,0.15));
+  border-color: rgba(0,180,216,0.35);
+}
+.price-card-badge {
+  position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+  background: var(--cyan); color: #fff; font-size: 11px; font-weight: 700;
+  padding: 4px 16px; border-radius: 20px; white-space: nowrap;
+}
+.price-name { font-size: 15px; font-weight: 700; color: #fff; margin-bottom: 8px; }
+.price-desc { font-size: 12px; color: rgba(255,255,255,0.35); margin-bottom: 20px; line-height: 1.5; }
+.price-old { font-size: 13px; color: rgba(255,255,255,0.2); text-decoration: line-through; margin-bottom: 4px; }
+.price-new { font-family: 'Montserrat', sans-serif; font-size: 36px; font-weight: 900; color: var(--cyan); }
+.price-new small { font-size: 16px; font-weight: 400; }
+.price-save { font-size: 11px; color: #06c755; margin-top: 4px; }
+
+.btn-line-cta {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: #06c755; color: #fff;
+  padding: 18px 44px; border-radius: 50px;
+  font-size: 16px; font-weight: 700; text-decoration: none;
+  transition: all 0.3s;
+  box-shadow: 0 0 40px rgba(6,199,85,0.3);
+}
+.btn-line-cta:hover { background: #05a847; box-shadow: 0 0 60px rgba(6,199,85,0.5); transform: translateY(-2px); }
+
+/* ── S4: PRODUCTS ── */
+#s4 { background: var(--dark); }
+.prod-header { text-align: center; margin-bottom: 48px; }
+.prod-h2 {
+  font-size: clamp(28px, 4vw, 48px); font-weight: 900; color: #fff;
+  margin-bottom: 12px;
+}
+.prod-sub { font-size: 15px; color: rgba(255,255,255,0.35); }
+.prod-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr);
+  gap: 24px; max-width: 800px; width: 100%;
+}
+.prod-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 20px; overflow: hidden;
+  text-decoration: none; transition: all 0.3s;
+  display: flex; flex-direction: column;
+}
+.prod-card:hover {
+  border-color: rgba(0,180,216,0.3);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+}
+.prod-img { height: 160px; overflow: hidden; position: relative; }
+.prod-img img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.85); }
+.prod-img-placeholder {
+  width: 100%; height: 100%;
+  background: linear-gradient(135deg, rgba(30,111,168,0.3), rgba(0,180,216,0.2));
+  display: flex; align-items: center; justify-content: center; font-size: 56px;
+}
+.prod-count {
+  position: absolute; top: 12px; left: 12px;
+  background: var(--cyan); color: #fff;
+  font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px;
+}
+.prod-body { padding: 20px 24px; flex: 1; }
+.prod-title { font-size: 18px; font-weight: 700; color: #fff; margin-bottom: 8px; }
+.prod-desc { font-size: 13px; color: rgba(255,255,255,0.35); line-height: 1.6; margin-bottom: 16px; }
+.prod-link { font-size: 13px; color: var(--cyan); font-weight: 700; display: flex; align-items: center; gap: 6px; }
+
+/* ── S5: TRUST ── */
+#s5 { background: linear-gradient(160deg, #0f2744, #0a1628); text-align: center; }
+.trust-h2 { font-size: clamp(28px, 4vw, 48px); font-weight: 900; color: #fff; margin-bottom: 16px; }
+.trust-sub { font-size: 15px; color: rgba(255,255,255,0.35); margin-bottom: 64px; }
+.trust-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 32px; max-width: 900px; width: 100%; }
+.trust-item { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+.trust-icon {
+  width: 64px; height: 64px; border-radius: 50%;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  display: flex; align-items: center; justify-content: center; font-size: 26px;
+}
+.trust-name { font-size: 15px; font-weight: 700; color: #fff; }
+.trust-desc { font-size: 13px; color: rgba(255,255,255,0.35); line-height: 1.6; }
+footer {
+  scroll-snap-align: start;
+  background: #060e1c;
+  text-align: center; padding: 28px;
+  font-size: 12px; color: rgba(255,255,255,0.2);
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  nav { padding: 0 20px; }
+  .nav-links { display: none; }
+  .panel { padding: 80px 24px 48px; align-items: flex-start; }
+  #s2, #s3, #s4, #s5 { align-items: center; }
+  .stat-row { gap: 16px; }
+  .stat-card { min-width: 140px; padding: 24px 16px; }
+  .stat-num { font-size: 32px; }
+  .flow-row { gap: 0; }
+  .flow-circle { width: 52px; height: 52px; font-size: 22px; }
+  .price-row { gap: 16px; }
+  .prod-grid { grid-template-columns: 1fr; max-width: 400px; }
+  .trust-grid { grid-template-columns: repeat(2,1fr); gap: 24px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="topnav">
+  <a href="index.html" class="nav-brand">
+    <img src="daisen_logo.svg" alt="呆森 DAISEN" style="height:32px;">
+  </a>
+  <div class="nav-links">
+    <a href="index.html" class="nav-link">首頁</a>
+    <a href="products.html" class="nav-link">吸頭配件</a>
+    <a href="products.html?tab=filters" class="nav-link">濾芯耗材</a>
+    <a href="#s3" class="nav-link">清潔服務</a>
+  </div>
+  <a href="https://lin.ee/WKcYuSs" target="_blank" class="nav-cta">LINE 立即預約</a>
+</nav>
+
+<!-- S1: HERO -->
+<section class="panel" id="s1">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+
+  <div class="hero-eyebrow">台灣現貨 · 快速出貨</div>
+
+  <h1 class="hero-h1">
+    你的 Dyson
+    <span class="accent" id="typewriter"></span><span class="cursor" id="cursor"></span>
+  </h1>
+
+  <p class="hero-sub">
+    灰塵堵塞、氣旋失效、馬達過熱——<br>
+    80% 的 Dyson 吸力下降，都是沒清潔造成的。
+  </p>
+
+  <div class="hero-btns">
+    <a href="#s3" class="btn-main">立即預約深度清潔</a>
+    <a href="products.html" class="btn-ghost">瀏覽配件 / 濾芯</a>
+  </div>
+
+  <div class="scroll-hint">
+    <span>↓</span>
+    SCROLL
+  </div>
+</section>
+
+<!-- S2: PAIN POINTS -->
+<section class="panel" id="s2">
+  <div class="pain-label reveal">你知道嗎</div>
+  <h2 class="pain-h2 reveal reveal-delay-1">
+    你的吸力，正在<span class="red">消失</span>
+  </h2>
+  <p class="pain-desc reveal reveal-delay-2">每天使用，每天在堵塞。你沒感覺，但數字不會說謊。</p>
+
+  <div class="stat-row">
+    <div class="stat-card reveal-left reveal-delay-1">
+      <div class="stat-icon">😮</div>
+      <div class="stat-num counter" data-target="6" data-suffix="">0</div>
+      <div class="stat-unit">個月<br>建議換一次濾芯<br><span style="color:#ff4d6d">多數人從沒換過</span></div>
+    </div>
+    <div class="stat-card reveal reveal-delay-2">
+      <div class="stat-icon">🌡️</div>
+      <div class="stat-num counter" data-target="40" data-suffix="°">0</div>
+      <div class="stat-unit">C+ 馬達過熱溫度<br>積塵阻礙散熱<br>縮短機器壽命</div>
+    </div>
+    <div class="stat-card reveal-right reveal-delay-3">
+      <div class="stat-icon">📉</div>
+      <div class="stat-num counter" data-target="50" data-prefix="-" data-suffix="%">0</div>
+      <div class="stat-unit">氣旋堵塞後<br>吸力最多下降一半<br>你卻以為它正常</div>
+    </div>
+    <div class="stat-card highlight reveal-scale reveal-delay-4">
+      <div class="stat-icon">✅</div>
+      <div class="stat-num">深度清潔後</div>
+      <div class="stat-unit" style="color:rgba(255,255,255,0.6)">吸力全面恢復<br>如同全新機器</div>
+    </div>
+  </div>
+
+  <a href="#s3" class="btn-main reveal reveal-delay-4">你的 Dyson 多久沒清潔了？</a>
+</section>
+
+<!-- S3: CLEAN SERVICE -->
+<section class="panel" id="s3">
+  <div class="clean-eyebrow reveal">到府收件服務</div>
+  <h2 class="clean-h2 reveal reveal-delay-1">Dyson 深度清潔</h2>
+  <p class="clean-sub reveal reveal-delay-2">超音波全機分解清洗，濾網同步更換，恢復原廠吸力</p>
+
+  <div class="flow-row reveal reveal-delay-2">
+    <div class="flow-item">
+      <div class="flow-circle">💬</div>
+      <div class="flow-name">LINE 預約</div>
+      <div class="flow-note">告知型號問題</div>
+    </div>
+    <div class="flow-sep">›</div>
+    <div class="flow-item">
+      <div class="flow-circle">📦</div>
+      <div class="flow-name">黑貓到府收件</div>
+      <div class="flow-note">免出門安全包裝</div>
+    </div>
+    <div class="flow-sep">›</div>
+    <div class="flow-item">
+      <div class="flow-circle">🫧</div>
+      <div class="flow-name">超音波清潔</div>
+      <div class="flow-note">全機分解零死角</div>
+    </div>
+    <div class="flow-sep">›</div>
+    <div class="flow-item">
+      <div class="flow-circle">🚚</div>
+      <div class="flow-name">黑貓寄回</div>
+      <div class="flow-note">清潔完畢直接到府</div>
+    </div>
+  </div>
+
+  <div class="price-row">
+    <div class="price-card reveal reveal-delay-1">
+      <div class="price-name">主機清潔保養</div>
+      <div class="price-desc">含更換前後置濾網<br>V6–V15 全系列適用</div>
+      <div class="price-old">原價 $2,000</div>
+      <div class="price-new"><small>$</small>1,900</div>
+      <div class="price-save">省 $100</div>
+    </div>
+    <div class="price-card featured reveal reveal-delay-2">
+      <div class="price-card-badge">最超值</div>
+      <div class="price-name">主機＋吸頭清潔</div>
+      <div class="price-desc">完整清潔方案<br>含前後置濾網更換</div>
+      <div class="price-old">原價 $2,800</div>
+      <div class="price-new"><small>$</small>2,660</div>
+      <div class="price-save">省 $140</div>
+    </div>
+    <div class="price-card reveal reveal-delay-3">
+      <div class="price-name">吸頭清潔保養</div>
+      <div class="price-desc">電動吸頭拆解清潔<br>所有型號通用</div>
+      <div class="price-old">原價 $1,300</div>
+      <div class="price-new"><small>$</small>1,235</div>
+      <div class="price-save">省 $65</div>
+    </div>
+  </div>
+
+  <a href="https://lin.ee/WKcYuSs" target="_blank" class="btn-line-cta reveal reveal-delay-4">
+    <span>💬</span> LINE 立即預約 →
+  </a>
+</section>
+
+<!-- S4: PRODUCTS -->
+<section class="panel" id="s4">
+  <div class="prod-header">
+    <div class="pain-label reveal">配件 × 耗材</div>
+    <h2 class="prod-h2 reveal reveal-delay-1">Dyson 用戶需要的<br>這裡都有</h2>
+    <p class="prod-sub reveal reveal-delay-2">全系列 V7–V15 副廠適用，台灣現貨快速出貨</p>
+  </div>
+  <div class="prod-grid">
+    <a href="products.html" class="prod-card reveal reveal-delay-1">
+      <div class="prod-img">
+        <img src="dyson配件/LINE_ALBUM_刷頭規格_260707_10.jpg" alt="吸頭配件">
+        <div class="prod-count">14 款</div>
+      </div>
+      <div class="prod-body">
+        <div class="prod-title">吸頭配件</div>
+        <div class="prod-desc">延長管、縫隙、床墊、除蟎——全系列快拆配件</div>
+        <div class="prod-link">查看所有配件 →</div>
+      </div>
+    </a>
+    <a href="products.html?tab=filters" class="prod-card reveal reveal-delay-2">
+      <div class="prod-img">
+        <img src="dyson濾芯/LINE_ALBUM_濾芯規格_260707_7.jpg" alt="濾芯耗材">
+        <div class="prod-count">7 款</div>
+      </div>
+      <div class="prod-body">
+        <div class="prod-title">濾芯耗材</div>
+        <div class="prod-desc">V7 / V8 / V10 / V11 / V12 / V15 前後置濾網</div>
+        <div class="prod-link">查看所有濾芯 →</div>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- S5: TRUST -->
+<section class="panel" id="s5">
+  <div class="pain-label reveal">為什麼選呆森</div>
+  <h2 class="trust-h2 reveal reveal-delay-1">購買更安心的理由</h2>
+  <p class="trust-sub reveal reveal-delay-2">每一個承諾，都是我們的底線</p>
+  <div class="trust-grid">
+    <div class="trust-item reveal reveal-delay-1">
+      <div class="trust-icon">🇹🇼</div>
+      <div class="trust-name">台灣現貨</div>
+      <div class="trust-desc">本島倉庫直發<br>快速出貨不等待</div>
+    </div>
+    <div class="trust-item reveal reveal-delay-2">
+      <div class="trust-icon">✅</div>
+      <div class="trust-name">品質保證</div>
+      <div class="trust-desc">嚴選製造商<br>與原廠規格相容</div>
+    </div>
+    <div class="trust-item reveal reveal-delay-3">
+      <div class="trust-icon">↩️</div>
+      <div class="trust-name">不滿意包退</div>
+      <div class="trust-desc">7 天鑑賞期<br>收到不滿意直接退</div>
+    </div>
+    <div class="trust-item reveal reveal-delay-4">
+      <div class="trust-icon">💬</div>
+      <div class="trust-name">LINE 即時客服</div>
+      <div class="trust-desc">不確定型號？<br>傳圖給我們幫你查</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © 2026 呆森 DaiSen｜森活網路行銷有限公司｜台灣現貨，快速出貨
+</footer>
+
+<!-- Side dots -->
+<nav class="side-dots" id="sideDots"></nav>
+
+<script>
+// ── Side dots ──
+const panels = ['s1','s2','s3','s4','s5'];
+const dotNav = document.getElementById('sideDots');
+panels.forEach((id, i) => {
+  const d = document.createElement('div');
+  d.className = 'side-dot' + (i===0?' active':'');
+  d.onclick = () => document.getElementById(id).scrollIntoView({behavior:'smooth'});
+  dotNav.appendChild(d);
+});
+
+// ── Reveal on scroll ──
+const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
+const revealObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.12 });
+revealEls.forEach(el => revealObs.observe(el));
+
+// ── Active dot tracking ──
+const sectionEls = panels.map(id => document.getElementById(id));
+const dots = dotNav.querySelectorAll('.side-dot');
+const sectionObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const i = panels.indexOf(e.target.id);
+      dots.forEach((d,j) => d.classList.toggle('active', i===j));
+    }
+  });
+}, { threshold: 0.5 });
+sectionEls.forEach(s => s && sectionObs.observe(s));
+
+// ── Typewriter ──
+const tw = document.getElementById('typewriter');
+const cur = document.getElementById('cursor');
+const text = '吸不動了嗎？';
+let i = 0;
+function type() {
+  if (i < text.length) {
+    tw.textContent += text[i++];
+    setTimeout(type, i < 4 ? 120 : 80);
+  } else {
+    setTimeout(() => cur.style.display='none', 1800);
+  }
+}
+setTimeout(type, 900);
+
+// ── Counter animation ──
+function animateCounter(el) {
+  const target = parseInt(el.dataset.target);
+  const prefix = el.dataset.prefix || '';
+  const suffix = el.dataset.suffix || '';
+  const dur = 1400;
+  const start = performance.now();
+  function step(now) {
+    const p = Math.min((now - start) / dur, 1);
+    const ease = 1 - Math.pow(1 - p, 3);
+    el.textContent = prefix + Math.round(ease * target) + suffix;
+    if (p < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+const counterObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting && !e.target.dataset.done) {
+      e.target.dataset.done = '1';
+      animateCounter(e.target);
+    }
+  });
+}, { threshold: 0.5 });
+document.querySelectorAll('.counter').forEach(el => counterObs.observe(el));
+</script>
+</body>
+</html>

@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>呆森 DaiSen｜配件與濾芯</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue: #1E6FA8;
+    --cyan: #00B4D8;
+    --white: #F5F8FA;
+    --gray: #4A4A4A;
+    --light: #E8EDF0;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Noto Sans TC', sans-serif; background: var(--white); color: var(--gray); }
+
+  /* Nav */
+  nav {
+    background: var(--blue);
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 200;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+  }
+  .nav-brand {
+    display: flex; align-items: center; gap: 10px;
+    padding: 16px 0; text-decoration: none;
+  }
+  .nav-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--cyan); }
+  .nav-brand-name {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700; font-size: 20px; color: #fff; letter-spacing: 2px;
+  }
+  .nav-brand-sub { font-size: 11px; color: rgba(255,255,255,0.65); }
+  .nav-links { display: flex; gap: 4px; }
+  .nav-link {
+    color: rgba(255,255,255,0.85); text-decoration: none;
+    font-size: 14px; padding: 10px 16px; border-radius: 6px;
+    transition: all 0.2s; font-weight: 500;
+  }
+  .nav-link:hover, .nav-link.active { background: rgba(255,255,255,0.15); color: #fff; }
+
+  /* Hero banner */
+  .hero {
+    background: linear-gradient(135deg, #1E6FA8 0%, #00B4D8 100%);
+    padding: 40px 40px 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero h1 { font-size: 28px; color: #fff; font-weight: 700; margin-bottom: 8px; }
+  .hero p { color: rgba(255,255,255,0.85); font-size: 15px; margin-bottom: 24px; }
+  .hero img {
+    max-width: 680px;
+    width: 100%;
+    display: block;
+    margin: 0 auto;
+    border-radius: 12px 12px 0 0;
+    box-shadow: 0 -4px 24px rgba(0,0,0,0.15);
+  }
+
+  /* Tabs */
+  .tabs {
+    background: #fff;
+    border-bottom: 2px solid var(--light);
+    display: flex;
+    padding: 0 40px;
+    gap: 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  }
+  .tab-btn {
+    padding: 16px 32px;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--gray);
+    border: none;
+    background: none;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    margin-bottom: -2px;
+    transition: all 0.2s;
+    font-family: 'Noto Sans TC', sans-serif;
+  }
+  .tab-btn:hover { color: var(--blue); }
+  .tab-btn.active { color: var(--blue); border-bottom-color: var(--blue); font-weight: 700; }
+  .tab-count {
+    display: inline-block;
+    background: var(--light);
+    color: var(--gray);
+    font-size: 12px;
+    padding: 2px 8px;
+    border-radius: 20px;
+    margin-left: 8px;
+  }
+  .tab-btn.active .tab-count { background: var(--blue); color: #fff; }
+
+  /* Content */
+  .tab-content { display: none; padding: 40px; }
+  .tab-content.active { display: block; }
+
+  /* Section intro */
+  .section-intro {
+    margin-bottom: 32px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--light);
+  }
+  .section-intro h2 { font-size: 22px; color: var(--blue); margin-bottom: 6px; }
+  .section-intro p { font-size: 14px; color: #888; }
+
+  /* Info box (型號說明) */
+  .info-box {
+    background: #fff;
+    border: 1px solid var(--light);
+    border-left: 4px solid var(--cyan);
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 32px;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  .info-box img { width: 180px; border-radius: 6px; flex-shrink: 0; }
+  .info-box-text h3 { font-size: 15px; font-weight: 700; color: var(--blue); margin-bottom: 6px; }
+  .info-box-text p { font-size: 13px; color: var(--gray); line-height: 1.6; }
+
+  /* Product grid */
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 24px;
+  }
+
+  /* Product card */
+  .card {
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+  }
+  .card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(30,111,168,0.12); }
+  .card-img {
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    background: var(--white);
+  }
+  .card-body { padding: 14px 16px 18px; }
+  .card-name { font-size: 15px; font-weight: 700; color: var(--gray); margin-bottom: 6px; line-height: 1.4; }
+  .card-models {
+    font-size: 12px;
+    color: var(--blue);
+    background: rgba(30,111,168,0.08);
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 20px;
+    margin-bottom: 12px;
+  }
+  .card-price {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--blue);
+  }
+  .card-price.tbd {
+    font-size: 14px;
+    color: #bbb;
+    font-weight: 400;
+  }
+  .card-btn {
+    display: block;
+    width: 100%;
+    margin-top: 12px;
+    padding: 9px;
+    background: var(--blue);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: 'Noto Sans TC', sans-serif;
+    transition: background 0.2s;
+  }
+  .card-btn:hover { background: var(--cyan); }
+
+  /* Footer */
+  footer {
+    background: #fff;
+    border-top: 1px solid var(--light);
+    text-align: center;
+    padding: 24px;
+    font-size: 13px;
+    color: #aaa;
+    margin-top: 60px;
+  }
+
+  @media (max-width: 600px) {
+    header { padding: 16px 20px; }
+    .hero { padding: 24px 20px 0; }
+    .tabs { padding: 0 20px; }
+    .tab-btn { padding: 14px 16px; font-size: 14px; }
+    .tab-content { padding: 24px 20px; }
+    .product-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+    .info-box { flex-direction: column; }
+    .info-box img { width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Nav -->
+<nav>
+  <a href="index.html" class="nav-brand">
+    <img src="daisen_logo.svg" alt="呆森 DAISEN" style="height:36px;">
+  </a>
+  <div class="nav-links">
+    <a href="index.html" class="nav-link">首頁</a>
+    <a href="products.html" class="nav-link active">配件 / 濾芯</a>
+    <a href="index.html#clean" class="nav-link">清潔服務</a>
+  </div>
+</nav>
+
+<!-- Hero -->
+<div class="hero">
+  <h1>戴森專用替換配件</h1>
+  <p>V7 / V8 / V10 / V11 / V12 / V15 全系列通用，品質保證，不滿意包退</p>
+  <img src="dyson配件/LINE_ALBUM_刷頭規格_260707_10.jpg" alt="呆森配件總覽">
+</div>
+
+<!-- Tabs -->
+<div class="tabs">
+  <button class="tab-btn active" onclick="switchTab('accessories', this)">
+    吸頭配件 <span class="tab-count">14</span>
+  </button>
+  <button class="tab-btn" onclick="switchTab('filters', this)">
+    濾芯耗材 <span class="tab-count">7</span>
+  </button>
+</div>
+
+<!-- Tab: 配件 -->
+<div id="tab-accessories" class="tab-content active">
+  <div class="section-intro">
+    <h2>吸頭配件</h2>
+    <p>適用 Dyson V7 / V8 / V10 / V11 / V12 / V15，快拆接頭設計，秒換不費力</p>
+  </div>
+  <div class="product-grid">
+
+    <div class="card">
+      <img class="card-img" src="dyson配件/LINE_ALBUM_刷頭規格_260707_1.jpg" alt="延長伸縮軟管">
+      <div class="card-body">
+        <div class="card-name">延長伸縮軟管 <span style="font-size:11px;font-weight:400;color:#aaa;background:#f0f4f7;padding:2px 7px;border-radius:10px;vertical-align:middle;">副廠適用</span></div>
+        <div class="card-models">V7 / V8 / V10 / V11 / V12 / V15</div>
+        <div class="card-price">$189</div>
+        <button class="card-btn">加入購物車</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <img class="card-img" src="dyson配件/LINE_ALBUM_刷頭規格_260707_2.jpg" alt="長軟縫隙吸頭">
+      <div class="card-body">
+        <div class="card-name">長軟縫隙吸頭 <span style="font-size:11px;font-weight:400;color:#aaa;background:#f0f4f7;padding:2px 7px;border-radius:10px;vertical-align:middle;">副廠適用</span></div>
+        <div class="card-models">V7 / V8 / V10 / V11 / V12 / V15</div>
+        <div class="card-price">$149</div>
+        <button class="card-btn">加入購物車</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <img class="card-img" src="dyson配件/LINE_ALBUM_刷頭規格_260707_3.jpg" alt="LED燈直吸頭">
+      <div class="card-body">
+        <div class="card-name">LED燈直吸頭 <span style="font-size:11px;font-weight:400;color:#aaa;background:#f0f4f7;padding:2px 7px;border-radius:10px;vertical-align:middle;">副廠適用</span></div>
+        <div class="card-models">V7 / V8 / V10 / V11 / V12 / V15</div>
+        <div class="card-price">$399</div>
+        <button class="card-btn">加入購物車</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <img class="card-img" src="dyson配件/LINE_ALBUM_刷頭規格_260707_4.jpg" alt="窄隙縫轉向吸頭">
+      <div class="card-body">
+        <div class="card-name">窄隙縫轉向吸頭 <span style="font-size:11px;font-weight:400;color:#aaa;background:#f0f4f7;padding:2px 7px;border-radius:10px;vertical-align:middle;">副廠適用</span></div>
+        <div class="card-models">V7 / V8 / V10 / V11 / V15</div>
+        <div class="card-price">$339</div>
+        <button class="card-btn">加入購物車</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <img class="card-img" src="dyson配件/LINE_ALBUM_刷頭規格_260707_5.jpg" alt="縫隙直吸頭">
+      <div class="card-body">
+        <div class="card-name">縫隙直吸頭 <span style="font-size:11px;font-weight:400;color:#aaa;background:#f0f4f7;padding:2px 7px;border-radius:10px;vertical-align:middle;">副廠適用</span></div>
+        <div class="card-models">V7 / V8 / V10 / V11 / V12 / V15</div>
+        <div class="card-price">$89</div>
+        <button class="card-btn">加入購物車</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <img class="card-img" src="dyson配件/LINE_ALBUM_刷頭規格_260707_6.jpg" alt="軟毛刷頭">
+      <div class="card-body">
+        <div class="card-name">軟毛刷頭 <span style="font-size:11px;font-weight:400;color:#aaa;background:#f0f4f7;padding:2px 7px;border-radius:10px;vertical-align:middle;">副廠適用</span></div>
+        <div class="card-models">V7 / V8 / V10 / V11 / V12 / V15</div>
+        <div class="card-price">$119</div>
+        <button class="card-btn">加入購物車</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <img class="card-img" src="dyson配件/LINE_ALBUM_刷頭規格_260707_7.jpg" alt="硬/軟吸頭（伸縮款）">
+      <div class="card-body">
+        <div class="card-name">硬/軟吸頭（伸縮款） <span style="font-size:11px;font-weight:400;color:#aaa;background:#f0f4f7;padding:2px 7px;border-radius:10px;vertical-align:middle;">副廠適用</span></div>
+        <div class="card-models">V7 / V8 / V10 / V11 / V12 / V15</div>
+        <div class="card-price">$89</div>
+        <button class="card-btn">加入購物車</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <img class="card-img" src="dyson配件/LINE_ALBUM_刷頭規格_260707_8.jpg" alt="硬毛圓刷">
+      <div class="card-body">
+        <div class="card-name">硬毛圓刷 <span style="font-size:11px;font-weight:400;color:#aaa;background:#f0f4f7;padding:2px 7px;border-radius:10px;vertical-align:middle;">副廠適用</span></div>
+        <div class="card-models">V7 / V8 / V10 / V11 / V12 / V15</div>
+        <div class="card-price">$99</div>
+        <button class="card-btn">加入購物車</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <img class="card-img" src="dyson配件/LINE_ALBUM_刷頭規格_260707_9.jpg" alt="床墊吸頭">
+      <div class="card-body">
+        <div class="card-name">床墊吸頭 <span style="font-size:11px;font-weight:400;color:#aaa;background:#f0f4f7;padding:2px 7px;border-radius:10px;vertical-align:middle;">副廠適用</span></div>
+        <div class="card-models">V7 / V8 / V10 / V11 / V12 / V15</div>
+        <div class="card-price">$89</div>
+        <button class="card-btn">加入購物車</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <img class="card-img" src="dyson配件/LINE_ALBUM_刷頭規格_260707_11.jpg" alt="蝴蝶吸（兩合一扁嘴刷頭）">
+      <div class="card-body">
+        <div class="card-name">蝴蝶吸（兩合一扁嘴刷頭） <span style="font-size:11px;font-weight:400;color:#aaa;background:#f0f4f7;padding:2px 7px;border-radius:10px;vertical-align:middle;">副廠適用</span></div>
+        <div class="card-models">V7 / V8 / V10 / V11 / V15</div>
+        <div class="card-price">$228</div>
+        <button class="card-btn">加入購物車</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <img class="card-img" src="dyson配件/LINE_ALBUM_刷頭規格_260707_12.jpg" alt="無痕除塵軟毛刷">
+      <div class="card-body">
+        <div class="card-name">無痕除塵軟毛刷 <span style="font-size:11px;font-weight:400;color:#aaa;background:#f0f4f7;padding:2px 7px;border-radius:10px;vertical-align:middle;">副廠適用</span></div>
+        <div class="card-models">V7 / V8 / V10 / V11 / V12 / V15</div>
+        <div class="card-price">$298</div>
+        <button class="card-btn">加入購物車</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <img class="card-img" src="dyson配件/LINE_ALBUM_刷頭規格_260707_13.jpg" alt="九孔收納架">
+      <div class="card-body">
+        <div class="card-name">九孔收納架 <span style="font-size:11px;font-weight:400;color:#aaa;background:#f0f4f7;padding:2px 7px;border-radius:10px;vertical-align:middle;">副廠適用</span></div>
+        <div class="card-models">V7 / V8 / V10 / V11</div>
+        <div class="card-price">$389</div>
+        <button class="card-btn">加入購物車</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <img class="card-img" src="dyson配件/LINE_ALBUM_刷頭規格_260707_14.jpg" alt="寵物刷（圓頭）">
+      <div class="card-body">
+        <div class="card-name">寵物刷（圓頭） <span style="font-size:11px;font-weight:400;color:#aaa;background:#f0f4f7;padding:2px 7px;border-radius:10px;vertical-align:middle;">副廠適用</span></div>
+        <div class="card-models">V7 / V8 / V10 / V11 / V12 / V15</div>
+        <div class="card-price">$389</div>
+        <button class="card-btn">加入購物車</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <img class="card-img" src="dyson配件/LINE_ALBUM_刷頭規格_260707_15.jpg" alt="電動除蟎吸頭">
+      <div class="card-body">
+        <div class="card-name">電動除蟎吸頭 <span style="font-size:11px;font-weight:400;color:#aaa;background:#f0f4f7;padding:2px 7px;border-radius:10px;vertical-align:middle;">副廠適用</span></div>
+        <div class="card-models">V7 / V8 / V10 / V11 / V12 / V15</div>
+        <div class="card-price">$445</div>
+        <button class="card-btn">加入購物車</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Tab: 濾芯 -->
+<div id="tab-filters" class="tab-content">
+  <div class="section-intro">
+    <h2>濾芯耗材</h2>
+    <p>原廠規格相容，定期更換維持最佳吸力，建議每 6–12 個月更換一次</p>
+  </div>
+
+  <!-- 型號說明 -->
+  <div class="info-box">
+    <img src="dyson濾芯/LINE_ALBUM_濾芯規格_260707_2.jpg" alt="型號對照表">
+    <div class="info-box-text">
+      <h3>不知道自己是哪個型號？</h3>
+      <p>翻到機身底部或電池組，找 <strong>SV 開頭</strong>的型號碼就知道！<br>
+      V10 台版：SV12 ／ V11：SV14~SV28 ／ V12：SV20~SV49 ／ V15：SV22、SV47<br>
+      不確定可以私訊我們，附上型號照片幫你確認。</p>
+    </div>
+  </div>
+
+  <div class="product-grid">
+
+    <div class="card">
+      <img class="card-img" src="dyson濾芯/LINE_ALBUM_濾芯規格_260707_1.jpg" alt="後置濾網 V12 Slim">
+      <div class="card-body">
+        <div class="card-name">後置濾網 <span style="font-size:11px;font-weight:400;color:#aaa;background:#f0f4f7;padding:2px 7px;border-radius:10px;vertical-align:middle;">副廠適用</span></div>
+        <div class="card-models">V12 Slim</div>
+        <div class="card-price">$189</div>
+        <button class="card-btn">加入購物車</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <img class="card-img" src="dyson濾芯/LINE_ALBUM_濾芯規格_260707_3.jpg" alt="後置濾網 V10 日版（短）">
+      <div class="card-body">
+        <div class="card-name">後置濾網 <span style="font-size:11px;font-weight:400;color:#aaa;background:#f0f4f7;padding:2px 7px;border-radius:10px;vertical-align:middle;">副廠適用</span></div>
+        <div class="card-models">V10 日版（短款）</div>
+        <div class="card-price">$98</div>
+        <button class="card-btn">加入購物車</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <img class="card-img" src="dyson濾芯/LINE_ALBUM_濾芯規格_260707_4.jpg" alt="後置濾網 V10 台灣版">
+      <div class="card-body">
+        <div class="card-name">後置濾網 <span style="font-size:11px;font-weight:400;color:#aaa;background:#f0f4f7;padding:2px 7px;border-radius:10px;vertical-align:middle;">副廠適用</span></div>
+        <div class="card-models">V10 台灣版</div>
+        <div class="card-price">$98</div>
+        <button class="card-btn">加入購物車</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <img class="card-img" src="dyson濾芯/LINE_ALBUM_濾芯規格_260707_5.jpg" alt="後置濾網 V7/V8">
+      <div class="card-body">
+        <div class="card-name">後置濾網 <span style="font-size:11px;font-weight:400;color:#aaa;background:#f0f4f7;padding:2px 7px;border-radius:10px;vertical-align:middle;">副廠適用</span></div>
+        <div class="card-models">V7 / V8</div>
+        <div class="card-price">$88</div>
+        <button class="card-btn">加入購物車</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <img class="card-img" src="dyson濾芯/LINE_ALBUM_濾芯規格_260707_6.jpg" alt="前置濾網 V7/V8/V6">
+      <div class="card-body">
+        <div class="card-name">前置濾網 <span style="font-size:11px;font-weight:400;color:#aaa;background:#f0f4f7;padding:2px 7px;border-radius:10px;vertical-align:middle;">副廠適用</span></div>
+        <div class="card-models">V6 / V7 / V8</div>
+        <div class="card-price">$48</div>
+        <button class="card-btn">加入購物車</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <img class="card-img" src="dyson濾芯/LINE_ALBUM_濾芯規格_260707_7.jpg" alt="後置濾網 V15系列">
+      <div class="card-body">
+        <div class="card-name">後置濾網 <span style="font-size:11px;font-weight:400;color:#aaa;background:#f0f4f7;padding:2px 7px;border-radius:10px;vertical-align:middle;">副廠適用</span></div>
+        <div class="card-models">V15 系列</div>
+        <div class="card-price">$134</div>
+        <button class="card-btn">加入購物車</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <img class="card-img" src="dyson濾芯/LINE_ALBUM_濾芯規格_260707_8.jpg" alt="後置濾網 V12系列">
+      <div class="card-body">
+        <div class="card-name">後置濾網 <span style="font-size:11px;font-weight:400;color:#aaa;background:#f0f4f7;padding:2px 7px;border-radius:10px;vertical-align:middle;">副廠適用</span></div>
+        <div class="card-models">V12 系列</div>
+        <div class="card-price">$189</div>
+        <button class="card-btn">加入購物車</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <img class="card-img" src="dyson濾芯/LINE_ALBUM_濾芯規格_260707_9.jpg" alt="後置濾網 V11系列">
+      <div class="card-body">
+        <div class="card-name">後置濾網 <span style="font-size:11px;font-weight:400;color:#aaa;background:#f0f4f7;padding:2px 7px;border-radius:10px;vertical-align:middle;">副廠適用</span></div>
+        <div class="card-models">V11 系列</div>
+        <div class="card-price">$144</div>
+        <button class="card-btn">加入購物車</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  © 2026 呆森 DaiSen｜森活網路行銷有限公司｜台灣現貨，快速出貨
+</footer>
+
+<script>
+  function switchTab(name, btn) {
+    document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+    document.getElementById('tab-' + name).classList.add('active');
+    btn.classList.add('active');
+  }
+</script>
+</body>
+</html>
