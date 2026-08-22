@@ -46,7 +46,20 @@ cd brands/03_呆森清潔/liff-catalog && python3 make_thumbs.py
 腳本會比對後台 API 的商品名稱，對不上的會印出來。
 目前 23 項裡 22 項有圖，只有「主機清潔保養」沒有（它是服務，卡片本來就是另一種樣式）。
 
-## LIFF
+## LIFF：這頁其實不需要
+
+**這頁沒有註冊 LIFF app，也不需要。** 圖文選單或聊天室裡放一般 https 連結，
+LINE 就會用內建瀏覽器打開，客人一樣沒離開 LINE。目錄不需要知道客人是誰。
+
+而且 `liff.sendMessages()` **從圖文選單開啟時本來就不能用**，
+所以走 LIFF 在這個入口一點好處都沒有。
+
+要註冊 LIFF app 的話有個坑：**Messaging API channel 不能掛 LIFF app**，
+會回 `Channel must have any of following Application Types: WEB, NATIVE_APP, LIFF...`。
+必須另外開一個 **LINE Login channel**，而開 channel 沒有 API，只能在 console 手動建。
+
+真正需要 LIFF 的是**要認出客人是誰**的功能（訂單查詢、預約單、我的預約），
+到那時候再開 Login channel 就好。
 
 `index.html` 裡的 `LIFF_ID` 目前是空的，填了才會啟用 LIFF SDK。
 
