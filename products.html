@@ -788,9 +788,17 @@ function scrollToProducts(tab) {
 }
 
 // LINE deeplink with product name
+// 帳號 ID 必須是 LINE 發的 basicId（GET /v2/bot/info 查得到），不是自訂稱呼。
+// 曾經寫成 @daisen，LINE 會回「無法找到該用戶」，22 張卡的購買按鈕全部失效。
+const LINE_BASIC_ID = '@342sxfwo';
+
 function lineAsk(productName) {
-  const msg = encodeURIComponent('我想詢問：' + productName);
-  window.open('https://line.me/R/oaMessage/@daisen?' + msg, '_blank');
+  const url = 'https://line.me/R/oaMessage/'
+            + encodeURIComponent(LINE_BASIC_ID) + '/?'
+            + encodeURIComponent('我想詢問：' + productName);
+  // LINE 內建瀏覽器會擋掉開新分頁，擋掉就直接跳轉
+  const opened = window.open(url, '_blank');
+  if (!opened) location.href = url;
 }
 
 // Reveal on scroll
