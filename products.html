@@ -816,6 +816,86 @@ const urlTab = new URLSearchParams(location.search).get('tab');
 if (urlTab === 'filters') {
   document.querySelectorAll('.tab-btn')[1].click();
 }
+
+/* ---------------------------------------------------------------
+   價格同步：載入後用後台的即時價格蓋掉下方寫死的數字。
+
+   後台（line-bot-admin →「產品／服務項目」）改價之後，這頁自動跟著變，
+   不用改這個檔、不用 git push。HTML 裡的數字是後台掛掉時的備援。
+
+   名稱比對的兩個坑：
+   - 官網濾芯卡是 card-name「後置濾網」+ card-models「V7 / V8」分兩段，
+     後台名稱是合併的「後置濾網 V7／V8」而且用全形斜線
+   - 吸頭配件的後台名稱不含機型
+   所以斜線要正規化，而且「含機型」「不含機型」兩種組合都要試。
+   --------------------------------------------------------------- */
+(function syncPrices() {
+  var API = 'https://line-bot-admin-478147972022.asia-east1.run.app/api/daisen/public/products';
+
+  function norm(s) { return String(s || '').replace(/\s+/g, '').replace(/\//g, '／'); }
+
+  fetch(API, { cache: 'no-store' })
+    .then(function (r) { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+    .then(function (products) {
+      var byName = {};
+      products.forEach(function (p) { byName[norm(p.name)] = p; });
+
+      var cards = [].slice.call(document.querySelectorAll('.card'));
+      var matched = [];
+
+      cards.forEach(function (card) {
+        var nameEl = card.querySelector('.card-name');
+        if (!nameEl) return;
+        var name = nameEl.textContent.trim();
+        var models = (card.querySelector('.card-models') || {}).textContent || '';
+        var p = byName[norm(name)] || byName[norm(name + models)];
+        matched.push({ card: card, product: p, label: name });
+      });
+
+      // 防呆：比對大範圍失敗時整批不動，寧可顯示舊價格也不要把整頁弄壞
+      var hits = matched.filter(function (m) { return m.product; });
+      if (!cards.length || hits.length < cards.length * 0.5) {
+        console.error('[價格同步] 只對上 ' + hits.length + '/' + cards.length +
+                      ' 張卡，判定比對邏輯有問題，維持頁面原本的價格。');
+        return;
+      }
+
+      var changed = [];
+      matched.forEach(function (m) {
+        if (!m.product) {
+          // 後台查無此品項（已停用或改名）→ 不要繼續賣
+          m.card.style.display = 'none';
+          console.warn('[價格同步] 後台沒有「' + m.label + '」，已隱藏該卡片。');
+          return;
+        }
+        var price = m.product.price;
+        var priceEl = m.card.querySelector('.card-price');
+        if (priceEl) {
+          var shown = parseInt(priceEl.textContent.replace(/[^\d]/g, ''), 10);
+          if (shown !== price) changed.push(m.label + ' ' + shown + '→' + price);
+          priceEl.innerHTML = '<small>$</small>' + price.toLocaleString();
+        }
+        // onclick 屬性裡的價格也是寫死的，改用 listener 蓋掉，避免動字串跳脫
+        var btn = m.card.querySelector('.card-btn');
+        if (btn) btn.onclick = function () { lineAsk(m.label + ' $' + price); };
+      });
+
+      // 分類張數跟著實際顯示的卡片走
+      document.querySelectorAll('.tab-content').forEach(function (tab, i) {
+        var visible = [].slice.call(tab.querySelectorAll('.card')).filter(function (c) {
+          return c.style.display !== 'none';
+        }).length;
+        var counter = document.querySelectorAll('.tab-count')[i];
+        if (counter) counter.textContent = visible;
+      });
+
+      if (changed.length) console.info('[價格同步] 已更新：' + changed.join('、'));
+    })
+    .catch(function (e) {
+      // 後台掛掉不該讓型錄壞掉，安靜沿用頁面既有的價格
+      console.warn('[價格同步] 讀不到後台價格，沿用頁面既有數字：', e.message);
+    });
+})();
 </script>
 </body>
 </html>
