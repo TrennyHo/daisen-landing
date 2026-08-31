@@ -1,0 +1,40 @@
+# ⚠️ 這個 repo 是 PUBLIC ⚠️
+# GitHub Pages 靠它托管 https://trennyho.github.io/daisen-landing/
+# 免費方案的 Pages 不支援 Private repo，所以它不能改成私有。
+#
+# 但這個資料夾同時是呆森的品牌工作區，裡面有：
+#   財務計劃.xlsx / 財務計劃.md      財務資料
+#   daisen_card_*_bleed.jpg          名片印刷檔
+#   brand-context.md                 品牌定位
+#   line-bot/data/pricing.md         bot 報價知識庫
+#   rich-menu/                       圖文選單設計檔
+# 這些都不該公開。
+#
+# 因此採「白名單」：預設擋掉全部，只放行網站真正用到的檔案。
+# 之後要加網站素材，記得在下面補一行 ! 放行，否則 git 看不到它。
+
+# ── 預設擋掉全部 ──
+/*
+
+# ── 放行：網站本體 ──
+!/.gitignore
+!/.github/
+!/.nojekyll
+!/index.html
+!/products.html
+
+# ── 放行：網站用到的圖 ──
+!/daisen_logo.svg
+!/daisen_logo_transparent.png
+!/line_qr.png
+!/dyson濾芯/
+!/dyson配件/
+
+# 這兩個資料夾只要規格圖，影片與其他子資料夾一律擋掉
+dyson濾芯/*
+!dyson濾芯/LINE_ALBUM_*.jpg
+dyson配件/*
+!dyson配件/LINE_ALBUM_*.jpg
+
+# ── 系統檔 ──
+.DS_Store
