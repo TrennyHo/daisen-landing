@@ -211,6 +211,14 @@ nav.topnav {
   background: rgba(255,255,255,0.06);
 }
 .card-img-wrap { position: relative; overflow: hidden; }
+/* 還沒有產品圖的品項：先用文字版，有圖再換成 <img class="card-img"> */
+.card-img-ph {
+  width: 100%; aspect-ratio: 1;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px;
+  background: linear-gradient(160deg, var(--dark3), var(--dark2));
+  color: #fff; font-family: 'Montserrat', sans-serif; font-size: 22px; font-weight: 900;
+}
+.card-img-ph small { font-family: 'Noto Sans TC', sans-serif; font-size: 12px; font-weight: 400; color: rgba(255,255,255,0.5); }
 .card-img {
   width: 100%; aspect-ratio: 1; object-fit: cover;
   display: block; transition: transform 0.4s;
@@ -615,25 +623,13 @@ src="https://www.facebook.com/tr?id=1838821526583145&ev=PageView&noscript=1"
       <div class="info-box-text">
         <h3>不知道自己是哪個型號？</h3>
         <p>翻到機身底部或電池組，找 <strong>SV 開頭</strong>的型號碼就知道！<br>
-        V10 台版：SV12 ／ V11：SV14~SV28 ／ V12：SV20~SV49 ／ V15：SV22、SV47<br>
+        V10 台版：SV12 ／ V11：SV14~SV28 ／ V12：SV20~SV49 ／ V15：SV22、SV47 ／ Digital Slim：SV18、SV52<br>
         不確定可以私訊我們，傳型號照片幫你確認。</p>
       </div>
     </div>
 
     <div class="product-grid">
 
-      <div class="card reveal reveal-delay-1">
-        <div class="card-img-wrap">
-          <img class="card-img" src="dyson濾芯/LINE_ALBUM_濾芯規格_260707_1.jpg" alt="後置濾網 V12 Slim">
-          <div class="card-tag">副廠適用</div>
-        </div>
-        <div class="card-body">
-          <div class="card-name">後置濾網</div>
-          <div class="card-models">V12 Slim</div>
-          <div class="card-price"><small>$</small>189</div>
-          <button class="card-btn" onclick="lineAsk('後置濾網 V12 Slim $189')">LINE 詢問購買</button>
-        </div>
-      </div>
 
       <div class="card reveal reveal-delay-2">
         <div class="card-img-wrap">
@@ -689,40 +685,53 @@ src="https://www.facebook.com/tr?id=1838821526583145&ev=PageView&noscript=1"
 
       <div class="card reveal reveal-delay-3">
         <div class="card-img-wrap">
-          <img class="card-img" src="dyson濾芯/LINE_ALBUM_濾芯規格_260707_7.jpg" alt="後置濾網 V15系列">
+          <img class="card-img" src="dyson濾芯/LINE_ALBUM_濾芯規格_260707_7.jpg" alt="後置濾網 V11 / V15 綠色">
           <div class="card-tag">副廠適用</div>
         </div>
         <div class="card-body">
           <div class="card-name">後置濾網</div>
-          <div class="card-models">V15 系列</div>
-          <div class="card-price"><small>$</small>134</div>
-          <button class="card-btn" onclick="lineAsk('後置濾網 V15 $134')">LINE 詢問購買</button>
+          <div class="card-models">V11 / V15 綠色</div>
+          <div class="card-price"><small>$</small>144</div>
+          <button class="card-btn" onclick="lineAsk('後置濾網 V11 / V15 綠色 $144')">LINE 詢問購買</button>
         </div>
       </div>
 
       <div class="card reveal reveal-delay-1">
         <div class="card-img-wrap">
-          <img class="card-img" src="dyson濾芯/LINE_ALBUM_濾芯規格_260707_8.jpg" alt="後置濾網 V12系列">
+          <img class="card-img" src="dyson濾芯/LINE_ALBUM_濾芯規格_260707_8.jpg" alt="後置濾網 V12 / V12 Slim">
           <div class="card-tag">副廠適用</div>
         </div>
         <div class="card-body">
           <div class="card-name">後置濾網</div>
-          <div class="card-models">V12 系列</div>
+          <div class="card-models">V12 / V12 Slim</div>
           <div class="card-price"><small>$</small>189</div>
-          <button class="card-btn" onclick="lineAsk('後置濾網 V12系列 $189')">LINE 詢問購買</button>
+          <button class="card-btn" onclick="lineAsk('後置濾網 V12 / V12 Slim $189')">LINE 詢問購買</button>
         </div>
       </div>
 
       <div class="card reveal reveal-delay-2">
         <div class="card-img-wrap">
-          <img class="card-img" src="dyson濾芯/LINE_ALBUM_濾芯規格_260707_9.jpg" alt="後置濾網 V11系列">
+          <img class="card-img" src="dyson濾芯/LINE_ALBUM_濾芯規格_260707_9.jpg" alt="後置濾網 V11 / V15 紫色">
           <div class="card-tag">副廠適用</div>
         </div>
         <div class="card-body">
           <div class="card-name">後置濾網</div>
-          <div class="card-models">V11 系列</div>
-          <div class="card-price"><small>$</small>144</div>
-          <button class="card-btn" onclick="lineAsk('後置濾網 V11 $144')">LINE 詢問購買</button>
+          <div class="card-models">V11 / V15 紫色</div>
+          <div class="card-price"><small>$</small>134</div>
+          <button class="card-btn" onclick="lineAsk('後置濾網 V11 / V15 紫色 $134')">LINE 詢問購買</button>
+        </div>
+      </div>
+
+      <div class="card reveal reveal-delay-3">
+        <div class="card-img-wrap">
+          <div class="card-img-ph" role="img" aria-label="後置濾網 Digital Slim">Digital Slim<small>SV18 ／ SV52</small></div>
+          <div class="card-tag">副廠適用</div>
+        </div>
+        <div class="card-body">
+          <div class="card-name">後置濾網</div>
+          <div class="card-models">Digital Slim</div>
+          <div class="card-price"><small>$</small>189</div>
+          <button class="card-btn" onclick="lineAsk('後置濾網 Digital Slim $189')">LINE 詢問購買</button>
         </div>
       </div>
 
