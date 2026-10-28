@@ -22,6 +22,8 @@
 !/.nojekyll
 !/index.html
 !/products.html
+!/AGENTS.md
+!/CLAUDE.md
 
 # ── 放行：網站用到的圖 ──
 !/daisen_logo.svg
